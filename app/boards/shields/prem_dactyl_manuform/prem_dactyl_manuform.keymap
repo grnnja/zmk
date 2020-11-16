@@ -24,8 +24,8 @@
 // &kp LSFT &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp CMMA &kp DOT &kp FSLH &kp RSFT
 //                 &kp LGUI &mo 1 &kp SPC   &kp RET &mo 2 &kp RALT
                         bindings = <
-&kp NUM_1  &kp NUM_2  &kp NUM_3  &kp NUM_4  &kp NUM_5  &kp NUM_6  &bt BT_CLR         &kp G  &kp G  &kp G  &kp G  &kp G  &kp G  &kp G
-&kp G  &kp Q  &kp W  &kp E  &kp R  &kp T  &bt BT_SEL 0	          &kp G  &kp G  &kp G  &kp G  &kp G  &kp G  &kp G
+&kp NUM_1  &kp NUM_2  &kp NUM_3  &kp NUM_4  &bt BT_SEL 0  &bt BT_CLR  &bt BT_CLR         &kp G  &kp G  &kp G  &kp G  &kp G  &kp G  &kp G
+&kp G  &kp Q  &kp W  &kp E  &kp R  &kp T  &bt BT_SEL 1	          &kp G  &kp G  &kp G  &kp G  &kp G  &kp G  &kp G
 &kp G  &kp A  &kp S  &kp D  &kp F  &kp G  &out OUT_TOG        &kp G  &kp G  &kp G  &kp G  &kp G  &kp G  &kp G
 &kp G  &kp Z  &kp X  &kp C  &kp V  &kp B		          &kp G  &kp G  &kp G  &kp G  &kp G  &kp G
 &kp G  &kp G  &kp G  &kp G					                    &kp G  &kp G  &kp G  &kp G

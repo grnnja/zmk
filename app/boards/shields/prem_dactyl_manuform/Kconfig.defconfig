@@ -2,7 +2,7 @@
 if SHIELD_PREM_DACTYL_MANUFORM_LEFT
 
 config ZMK_KEYBOARD_NAME
-	default "Prem Dactyl Manuform Left"
+	default "Dactyl Manuform"
 
 endif
 
