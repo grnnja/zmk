@@ -1,5 +1,5 @@
 module.exports = {
-  someSidebar: {
+  docs: {
     "Getting Started": [
       "intro",
       "hardware",
@@ -9,22 +9,22 @@ module.exports = {
       "troubleshooting",
     ],
     Features: [
-      "feature/keymaps",
-      "feature/displays",
-      "feature/encoders",
-      "feature/underglow",
+      "features/keymaps",
+      "features/displays",
+      "features/encoders",
+      "features/underglow",
     ],
     Behaviors: [
-      "behavior/key-press",
-      "behavior/layers",
-      "behavior/misc",
-      "behavior/hold-tap",
-      "behavior/mod-tap",
-      "behavior/reset",
-      "behavior/bluetooth",
-      "behavior/outputs",
-      "behavior/lighting",
-      "behavior/power",
+      "behaviors/key-press",
+      "behaviors/layers",
+      "behaviors/misc",
+      "behaviors/hold-tap",
+      "behaviors/mod-tap",
+      "behaviors/reset",
+      "behaviors/bluetooth",
+      "behaviors/outputs",
+      "behaviors/lighting",
+      "behaviors/power",
     ],
     Codes: [
       "codes/index",

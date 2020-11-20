@@ -19,7 +19,7 @@ The categories of supported codes are:
 
 Please visit the [codes](../codes) section for a comprehensive list.
 
-For advanced users, user-defined HID codes are also supported but must be encoded, please see [`dt-bindings/zmk/keys.h`](https://github.com/zmkfirmware/zmk/blob/main/app/include/dt-bindings/zmk/keys.h) for further insight.
+For advanced users, user-defined HID usages are also supported but must be encoded, please see [`dt-bindings/zmk/keys.h`](https://github.com/zmkfirmware/zmk/blob/main/app/include/dt-bindings/zmk/keys.h) for further insight.
 
 ## Keycode Defines
 
@@ -32,11 +32,6 @@ provided by ZMK near the top:
 ```
 
 Doing so makes a set of defines such as `A`, `N1`, etc. available for use with these behaviors
-
-:::note
-There is an [open issue](https://github.com/zmkfirmware/zmk/issues/21) to provide a more comprehensive, and
-complete set of defines for the full keypad and consumer usage pages in the future for ZMK.
-:::
 
 ### Improperly defined keymap - `dtlib.DTError: <board>.dts.pre.tmp:<line number>`
 

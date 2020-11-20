@@ -3,6 +3,9 @@ title: Keymaps & Behaviors
 sidebar_label: Keymaps
 ---
 
+import KeymapExample from '../keymap-example.md';
+import KeymapExampleFile from '../keymap-example-file.md';
+
 ZMK uses a declarative approach to keymaps instead of using C code for all keymap configuration.
 Right now, ZMK uses the devicetree syntax to declare those keymaps; future work is envisioned for
 supporting dynamic loading of declarative keymaps, e.g. over USB Mass Storage or via a custom BLE
@@ -30,7 +33,7 @@ For example, the simplest behavior in ZMK is the "key press" behavior, which res
 (a certain spot on the keyboard), and when that position is pressed, send a keycode to the host, and
 when the key position is released, updates the host to notify of the keycode being released.
 
-For the full set of possible behaviors, start at the [Key Press](/docs/behavior/key-press) behavior.
+For the full set of possible behaviors, start at the [Key Press](/docs/behaviors/key-press) behavior.
 
 ## Layers
 
@@ -121,62 +124,17 @@ Nested under the devicetree root, is the keymap node. The node _name_ itself is 
 Each layer of your keymap will be nested under the keymap node. Here is a sample
 that defines just one layer for this keymap:
 
-```
-	keymap {
-		compatible = "zmk,keymap";
-
-		default_layer {
-// --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// |   ESC   |    Q    |    W    |    E    |    R    |    T    |                                          |    Y    |    U    |    I    |    O    |    P    |    \    |
-// |   TAB   |    A    |    S    |    D    |    F    |    G    |                                          |    H    |    J    |    K    |    L    |    ;    |    '    |
-// |  SHIFT  |    Z    |    X    |    C    |    V    |    B    | CTRL+A  | CTRL+C  |  |  CTRL+V |  CTRL+X |    N    |    M    |    ,    |    .    |    /    |  R CTRL |
-//                               |   GUI   |   DEL   | RETURN  |  SPACE  | ESCAPE  |  |  RETURN |  SPACE  |   TAB   |   BSPC  |  R ALT  |
-			bindings = <
-    &kp ESC   &kp Q     &kp W    &kp E     &kp R     &kp T                                                 &kp Y     &kp U     &kp I     &kp O     &kp P    &kp BSLH
-    &kp TAB   &kp A     &kp S    &kp D     &kp F     &kp G                                                 &kp H     &kp J     &kp K     &kp L     &kp SEMI &kp QUOTE
-    &kp LSHFT &kp Z     &kp X    &kp C     &kp V     &kp B      &kp LC(A) &kp LC(C)    &kp LC(V) &kp LC(X) &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH &kp RCTRL
-                                 &kp LGUI  &kp DEL   &kp RET    &kp SPACE &kp ESC      &kp RET   &kp SPACE &kp TAB   &kp BSPC  &kp RALT
-			>;
-
-			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
-		};
-	};
-```
+<KeymapExample/>
 
 Each layer should have:
 
 1. A `bindings` property this will be a list of behaviour bindings, one for each key position for the keyboard.
 1. (Optional) A `sensor-bindings` property that will be a list of behavior bindings for each sensor on the keyboard. (Currently, only encoders are supported as sensor hardware, but in the future devices like trackpoints would be supported the same way)
 
-For the full set of possible behaviors, start at the [Key Press](/docs/behavior/key-press) behavior.
+For the full set of possible behaviors, start at the [Key Press](/docs/behaviors/key-press) behavior.
 
 ### Complete Example
 
 Putting this all together, a complete [`kyria.keymap`](https://github.com/zmkfirmware/zmk/blob/main/app/boards/shields/kyria/kyria.keymap) looks like:
 
-```
-#include <behaviors.dtsi>
-#include <dt-bindings/zmk/keys.h>
-
-/ {
-	keymap {
-		compatible = "zmk,keymap";
-
-		default_layer {
-// --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// |   ESC   |    Q    |    W    |    E    |    R    |    T    |                                          |    Y    |    U    |    I    |    O    |    P    |    \    |
-// |   TAB   |    A    |    S    |    D    |    F    |    G    |                                          |    H    |    J    |    K    |    L    |    ;    |    '    |
-// |  SHIFT  |    Z    |    X    |    C    |    V    |    B    | CTRL+A  | CTRL+C  |  |  CTRL+V |  CTRL+X |    N    |    M    |    ,    |    .    |    /    |  R CTRL |
-//                               |   GUI   |   DEL   | RETURN  |  SPACE  | ESCAPE  |  |  RETURN |  SPACE  |   TAB   |   BSPC  |  R ALT  |
-			bindings = <
-    &kp ESC   &kp Q     &kp W    &kp E     &kp R     &kp T                                                 &kp Y     &kp U     &kp I     &kp O     &kp P    &kp BSLH
-    &kp TAB   &kp A     &kp S    &kp D     &kp F     &kp G                                                 &kp H     &kp J     &kp K     &kp L     &kp SEMI &kp QUOTE
-    &kp LSHFT &kp Z     &kp X    &kp C     &kp V     &kp B      &kp LC(A) &kp LC(C)    &kp LC(V) &kp LC(X) &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH &kp RCTRL
-                                 &kp LGUI  &kp DEL   &kp RET    &kp SPACE &kp ESC      &kp RET   &kp SPACE &kp TAB   &kp BSPC  &kp RALT
-			>;
-
-			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
-		};
-	};
-};
-```
+<KeymapExampleFile/>
