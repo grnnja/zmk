@@ -32,7 +32,7 @@
 &kp LCTRL  &kp A     &kp S     &kp D   &kp F     &kp G    &mo KB       &mo KB   &kp H    &kp J    &kp K     &kp L     &kp SEMI  &kp SQT
 &kp LSHFT  &kp Z     &kp X     &kp C   &kp V     &kp B		                &kp N    &kp M    &kp COMMA &kp DOT   &kp SLASH &kp RSHFT
 &kp CAPS   &kp LGUI  &kp LALT  &kp PAUSE_BREAK					                  &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT
-			               &kp DEL   &kp BSPC                       &kp SPACE &kp ENTER
+			               &kp LALT   &kp BSPC                       &kp SPACE &kp ENTER
                                        &kp LSHFT &kp LCTRL                      &kp RCTRL &kp RSHFT
                                        &kp LGUI  &mo FN	                        &mo FN    &kp LGUI
                         >;
