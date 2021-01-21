@@ -9,15 +9,15 @@
 
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
-#include <zmk/event-manager.h>
-#include <zmk/events/keycode-state-changed.h>
-#include <zmk/events/modifiers-state-changed.h>
+#include <zmk/event_manager.h>
+#include <zmk/events/keycode_state_changed.h>
+#include <zmk/events/modifiers_state_changed.h>
 #include <zmk/hid.h>
 #include <dt-bindings/zmk/hid_usage_pages.h>
 #include <zmk/endpoints.h>
 
-static int hid_listener_keycode_pressed(uint8_t usage_page, uint32_t keycode,
-                                        zmk_mod_flags implicit_modifiers) {
+static int hid_listener_keycode_pressed(uint16_t usage_page, uint32_t keycode,
+                                        zmk_mod_flags_t implicit_modifiers) {
     int err;
     LOG_DBG("usage_page 0x%02X keycode 0x%02X mods 0x%02X", usage_page, keycode,
             implicit_modifiers);
@@ -41,8 +41,8 @@ static int hid_listener_keycode_pressed(uint8_t usage_page, uint32_t keycode,
     return zmk_endpoints_send_report(usage_page);
 }
 
-static int hid_listener_keycode_released(uint8_t usage_page, uint32_t keycode,
-                                         zmk_mod_flags implicit_modifiers) {
+static int hid_listener_keycode_released(uint16_t usage_page, uint32_t keycode,
+                                         zmk_mod_flags_t implicit_modifiers) {
     int err;
     LOG_DBG("usage_page 0x%02X keycode 0x%02X mods 0x%02X", usage_page, keycode,
             implicit_modifiers);
@@ -70,9 +70,9 @@ static int hid_listener_keycode_released(uint8_t usage_page, uint32_t keycode,
     return zmk_endpoints_send_report(usage_page);
 }
 
-int hid_listener(const struct zmk_event_header *eh) {
-    if (is_keycode_state_changed(eh)) {
-        const struct keycode_state_changed *ev = cast_keycode_state_changed(eh);
+int hid_listener(const zmk_event_t *eh) {
+    const struct zmk_keycode_state_changed *ev = as_zmk_keycode_state_changed(eh);
+    if (ev) {
         if (ev->state) {
             hid_listener_keycode_pressed(ev->usage_page, ev->keycode, ev->implicit_modifiers);
         } else {
@@ -83,4 +83,4 @@ int hid_listener(const struct zmk_event_header *eh) {
 }
 
 ZMK_LISTENER(hid_listener, hid_listener);
-ZMK_SUBSCRIPTION(hid_listener, keycode_state_changed);
+ZMK_SUBSCRIPTION(hid_listener, zmk_keycode_state_changed);

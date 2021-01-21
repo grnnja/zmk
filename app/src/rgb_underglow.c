@@ -265,7 +265,14 @@ static int zmk_rgb_underglow_init(const struct device *_arg) {
     };
 
 #if IS_ENABLED(CONFIG_SETTINGS)
-    settings_register(&rgb_conf);
+    settings_subsys_init();
+
+    int err = settings_register(&rgb_conf);
+    if (err) {
+        LOG_ERR("Failed to register the ext_power settings handler (err %d)", err);
+        return err;
+    }
+
     k_delayed_work_init(&underglow_save_work, zmk_rgb_underglow_save_state_work);
 
     settings_load_subtree("rgb/underglow");
@@ -337,6 +344,18 @@ int zmk_rgb_underglow_toggle() {
     }
 
     return zmk_rgb_underglow_save_state();
+}
+
+int zmk_rgb_underglow_set_hsb(uint16_t hue, uint8_t saturation, uint8_t brightness) {
+    if (hue > 360 || saturation > 100 || brightness > 100) {
+        return -ENOTSUP;
+    }
+
+    state.hue = hue;
+    state.saturation = saturation;
+    state.brightness = brightness;
+
+    return 0;
 }
 
 int zmk_rgb_underglow_change_hue(int direction) {

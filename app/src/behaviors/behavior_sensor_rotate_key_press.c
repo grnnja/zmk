@@ -11,8 +11,8 @@
 #include <logging/log.h>
 
 #include <drivers/sensor.h>
-#include <zmk/event-manager.h>
-#include <zmk/events/keycode-state-changed.h>
+#include <zmk/event_manager.h>
+#include <zmk/events/keycode_state_changed.h>
 
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
@@ -45,12 +45,12 @@ static int on_sensor_binding_triggered(struct zmk_behavior_binding *binding,
 
     LOG_DBG("SEND %d", keycode);
 
-    ZMK_EVENT_RAISE(keycode_state_changed_from_encoded(keycode, true, timestamp));
+    ZMK_EVENT_RAISE(zmk_keycode_state_changed_from_encoded(keycode, true, timestamp));
 
     // TODO: Better way to do this?
     k_msleep(5);
 
-    return ZMK_EVENT_RAISE(keycode_state_changed_from_encoded(keycode, false, timestamp));
+    return ZMK_EVENT_RAISE(zmk_keycode_state_changed_from_encoded(keycode, false, timestamp));
 }
 
 static const struct behavior_driver_api behavior_sensor_rotate_key_press_driver_api = {

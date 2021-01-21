@@ -14,8 +14,8 @@
 
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
-#include <zmk/event-manager.h>
-#include <zmk/events/battery-state-changed.h>
+#include <zmk/event_manager.h>
+#include <zmk/events/battery_state_changed.h>
 
 const struct device *battery;
 
@@ -45,9 +45,8 @@ static int zmk_battery_update(const struct device *battery) {
         return rc;
     }
 
-    struct battery_state_changed *ev = new_battery_state_changed();
-    ev->state_of_charge = state_of_charge.val1;
-    return ZMK_EVENT_RAISE(ev);
+    return ZMK_EVENT_RAISE(new_zmk_battery_state_changed(
+        (struct zmk_battery_state_changed){.state_of_charge = state_of_charge.val1}));
 }
 
 static void zmk_battery_work(struct k_work *work) {
