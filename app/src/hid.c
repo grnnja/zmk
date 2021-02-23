@@ -26,6 +26,8 @@ static zmk_mod_flags_t explicit_modifiers = 0;
         LOG_DBG("Modifiers set to 0x%02X", keyboard_report.body.modifiers);                        \
     }
 
+zmk_mod_flags_t zmk_hid_get_explicit_mods() { return explicit_modifiers; }
+
 int zmk_hid_register_mod(zmk_mod_t modifier) {
     explicit_modifier_counts[modifier]++;
     LOG_DBG("Modifier %d count %d", modifier, explicit_modifier_counts[modifier]);
@@ -46,6 +48,24 @@ int zmk_hid_unregister_mod(zmk_mod_t modifier) {
         WRITE_BIT(explicit_modifiers, modifier, false);
     }
     SET_MODIFIERS(explicit_modifiers);
+    return 0;
+}
+
+int zmk_hid_register_mods(zmk_mod_flags_t modifiers) {
+    for (zmk_mod_t i = 0; i < 8; i++) {
+        if (modifiers & (1 << i)) {
+            zmk_hid_register_mod(i);
+        }
+    }
+    return 0;
+}
+
+int zmk_hid_unregister_mods(zmk_mod_flags_t modifiers) {
+    for (zmk_mod_t i = 0; i < 8; i++) {
+        if (modifiers & (1 << i)) {
+            zmk_hid_unregister_mod(i);
+        }
+    }
     return 0;
 }
 
